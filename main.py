@@ -29,18 +29,14 @@ while run:
             run = False
 
         if current_screen == START_SCREEN:
-            current_screen = start_screen(
-                screen, MAP_SCREEN, START_SCREEN, SCREEN_WIDTH, SCREEN_HEIGHT)
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
-                current_screen = MAP_SCREEN
+            current_screen = start_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
         elif current_screen == MAP_SCREEN:
-            current_screen = map_screen()
+            current_screen = map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
         elif current_screen == BATTLE_SCREEN:
-            current_screen = battlefield_screen(screen)
+            current_screen = battlefield_screen(
+                screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
-    # Render game elements for the current screen
-    pygame.display.update()  # Update display
+    pygame.display.flip()  # Update display
 
 # exit pygame
 pygame.quit()
