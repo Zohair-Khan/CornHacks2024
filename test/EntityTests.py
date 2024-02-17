@@ -1,9 +1,9 @@
 import unittest
-from entity import entity
-from player import player
-import fight
-import augments
-from enemy import enemy
+from game.classes.entity import entity
+from game.classes.player import player
+import game.classes.fight
+import game.classes.augments
+from game.classes.enemy import enemy
 
 class TestEntityMethods(unittest.TestCase):
 
