@@ -30,14 +30,6 @@ start_button_rect = pygame.Rect((SCREEN_WIDTH - button_width) // 2, 200, button_
 map_button_rect = pygame.Rect((SCREEN_WIDTH - button_width) // 2, 270, button_width, button_height) #Center Second
 credits_button_rect = pygame.Rect(20, SCREEN_HEIGHT - button_height - 20, button_width, button_height) #Left Bottom
 
-# Difficulty slider setup
-difficulty_slider_rect = pygame.Rect((SCREEN_WIDTH - button_width) // 2, 450, button_width, button_height)
-slider_bar_rect = pygame.Rect(difficulty_slider_rect.x, difficulty_slider_rect.y + difficulty_slider_rect.height // 2 - 2, button_width, 4)
-slider_button_radius = 10
-slider_button_rect = pygame.Rect(slider_bar_rect.x - slider_button_radius, slider_bar_rect.y + slider_bar_rect.height // 2 - slider_button_radius, slider_button_radius * 2, slider_button_radius * 2)
-slider_max_value = 10
-slider_value = slider_max_value // 2  #Slider is at Mid difficulty when starting the game
-
 # Text for buttons
 start_text = font.render("Start", True, BLACK)
 map_text = font.render("Map", True, BLACK)
@@ -63,10 +55,7 @@ while True:
                     print("Map button clicked")
                 elif credits_button_rect.collidepoint(event.pos):
                     print("Credits button clicked")
-                elif difficulty_slider_rect.collidepoint(event.pos):
-                    #Changing the slider value!!
-                    slider_value = min(max(0, (event.pos[0] - slider_bar_rect.x) / slider_bar_rect.width * slider_max_value), slider_max_value)
-
+                    
     #Basic Button drawing
     pygame.draw.rect(screen, GRAY, start_button_rect)
     pygame.draw.rect(screen, GRAY, map_button_rect)
@@ -84,12 +73,5 @@ while True:
     screen.blit(start_text, (start_button_rect.x + button_width // 2 - start_text.get_width() // 2, start_button_rect.y + button_height // 2 - start_text.get_height() // 2))
     screen.blit(map_text, (map_button_rect.x + button_width // 2 - map_text.get_width() // 2, map_button_rect.y + button_height // 2 - map_text.get_height() // 2))
     screen.blit(credits_text, (credits_button_rect.x + button_width // 2 - credits_text.get_width() // 2, credits_button_rect.y + button_height // 2 - credits_text.get_height() // 2))
-
-    #The slider
-    pygame.draw.rect(screen, BLACK, slider_bar_rect)
-    pygame.draw.circle(screen, BLACK, (int(slider_bar_rect.x + slider_value / slider_max_value * slider_bar_rect.width), slider_button_rect.centery), slider_button_radius)
-    screen.blit(difficulty_text, (difficulty_slider_rect.x, difficulty_slider_rect.y - 30))
-    screen.blit(easy_text, (slider_bar_rect.left, slider_bar_rect.bottom + 5))
-    screen.blit(insane_text, (slider_bar_rect.right - insane_text.get_width(), slider_bar_rect.bottom + 5))
 
     pygame.display.flip()
