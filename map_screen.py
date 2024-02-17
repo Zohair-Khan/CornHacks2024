@@ -1,5 +1,6 @@
 import pygame
 import sys
+from battlefield_screen import battlefield_screen
 
 
 def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
@@ -15,22 +16,31 @@ def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
     map_image = pygame.transform.scale(
         map_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    # Define any buttons or interactive elements specific to the map screen
+    # Define level 1 button
+    level1_button_img = pygame.image.load("assets/icon/level1icon.png")
+    button_width, button_height = 150, 100
+    level1_button_img = pygame.transform.scale(
+        level1_button_img, (button_width, button_height))
+
+    # Define level 1 button
+    level1_button_rect = level1_button_img.get_rect(bottomleft=(320, 430))
 
     # Game loop for the map screen
     while True:
+        screen.fill(WHITE)
+        screen.blit(map_image, (0, 0))
 
-        # Render any elements specific to the map screen
-        # This may include the map background, level buttons, etc.
+        # Render level 1 button and icon
+        screen.blit(level1_button_img, level1_button_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # Handle mouse clicks on any interactive elements
-                # For example, if a level button is clicked, you may transition to the battlefield screen
-                pass  # Replace this with your logic
+                if level1_button_rect.collidepoint(event.pos):
+                    current_state = battlefield_screen(
+                        screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
         # Update the display
         pygame.display.flip()

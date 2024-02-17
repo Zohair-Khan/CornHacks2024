@@ -1,6 +1,5 @@
 import pygame
 import sys
-from battlefield_screen import battlefield_screen
 from map_screen import map_screen
 
 
@@ -33,7 +32,6 @@ def start_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 
     # Text for buttons
     start_text = font.render("Start", True, BLACK)
-    map_text = font.render("Map", True, BLACK)
     credits_text = font.render("Credits", True, BLACK)
 
     # Game loop
