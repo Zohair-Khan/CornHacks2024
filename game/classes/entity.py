@@ -30,9 +30,13 @@ class entity:
         return stats
 
     def modifyHP(self, value):
+        maxhp = self.returnStats()["maxhp"]
         self.currenthp = self.currenthp+value
         if(self.currenthp < 0):
             self.currenthp = 0
+        if(self.currenthp > maxhp):
+            self.currenthp = maxhp
 
     def gameOver(self):
         return (self.currenthp <= 0)
+
