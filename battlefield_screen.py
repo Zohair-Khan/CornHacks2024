@@ -21,7 +21,8 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 
     # Game loop for the battlefield screen
     while True:
-
+        screen.fill(WHITE)
+        screen.blit(background_image, (0, 0))
         # Render any elements specific to the battlefield screen
         # This may include the battlefield background, player characters, enemy characters, etc.
 
