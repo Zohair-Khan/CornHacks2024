@@ -28,7 +28,8 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         pygame.draw.rect(screen, YELLOW, (x, y, 400*ratio, 30))
 
     # load player image
-    player_image = pygame.image.load("assets/characterImages/Steven.png")
+    player_image = pygame.image.load(
+        "assets/characterImages/Steven.png").convert_alpha()
     player_image = pygame.transform.scale(player_image, (400, 400))
 
     # create player
