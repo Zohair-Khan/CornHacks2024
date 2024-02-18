@@ -78,12 +78,6 @@ def node_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 
         if map_mode:
 
-            # Map plotting
-            pygame.draw.rect(
-                screen, WHITE, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100))
-            pygame.draw.rect(
-                screen, BLACK, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100), 2)
-
             floor_label = font.render(f"Floor {current_floor}", True, BLACK)
             screen.blit(floor_label, (500 - floor_label.get_width() // 2, 70))
 
