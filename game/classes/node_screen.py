@@ -78,8 +78,26 @@ def node_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 
         if map_mode:
 
-            floor_label = font.render(f"Floor {current_floor}", True, BLACK)
-            screen.blit(floor_label, (500 - floor_label.get_width() // 2, 70))
+            floor_label = font.render(f"Stage {current_floor}", True, BLACK)
+            screen.blit(floor_label, (480 -
+                        floor_label.get_width() // 2, 70))
+
+            # Draw lines between adjacent nodes
+            for row in range(num_rows - 1):
+                for col in range(nodes_per_row[row]):
+                    # Calculate the index of the current node
+                    current_node_index = sum(nodes_per_row[:row]) + col
+                    current_node_pos = node_positions[current_node_index]
+
+                    # Draw lines to nodes in the row below
+                    for col_below in range(nodes_per_row[row + 1]):
+                        below_node_index = sum(
+                            nodes_per_row[:row + 1]) + col_below
+                        below_node_pos = node_positions[below_node_index]
+
+                        # Draw a line between the current node and the node below it
+                        pygame.draw.line(
+                            screen, BLACK, current_node_pos, below_node_pos)
 
             # Draw nodes and make them clickable
             for i, pos in enumerate(node_positions, start=1):

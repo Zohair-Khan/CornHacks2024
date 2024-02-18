@@ -8,11 +8,10 @@ from levelgraph import levelgraph
 import random
 
 floorenemies = [11, 9, 7]
-steven = player("Even Steven", 1000, 20, .4,.6,.3);
+steven = player("Even Steven", 80, 30, .4,.65,.325);
 
 floorgraph = levelgraph(3, floorenemies)
 floorgraph.printgraph()
-
 
 
 # node1 = levelnode(random.randint(1, 3))
