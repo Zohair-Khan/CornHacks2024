@@ -1,6 +1,7 @@
 import pygame
 import sys
 from player import player
+from fighter import Fighter
 
 
 def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
@@ -22,6 +23,7 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
 
     # create player
     player_1 = player("Steven", 100, 100, 100, 100, 100)
+    fighter_1 = Fighter(100, 100)
 
     # Game loop for the battlefield screen
     while True:
@@ -29,8 +31,10 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         screen.blit(background_image, (0, 0))
         # Draw the player on the screen
         screen.blit(player_image, (60, 100))
-
         player_1.move()
+
+        fighter_1.draw(screen)
+        fighter_1.move()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

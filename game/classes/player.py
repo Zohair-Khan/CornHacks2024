@@ -9,7 +9,7 @@ class player(entity):
         self.rect = self.image.get_rect()
 
     def move(self):
-        SPEED = 10
+        SPEED = 1
         dx = 0
         dy = 0
 
@@ -20,7 +20,7 @@ class player(entity):
         if key[pygame.K_a]:
             dx = -SPEED
         if key[pygame.K_d]:
-            dx = -SPEED
+            dx = SPEED
 
         # update player position
         self.rect.x += dx
