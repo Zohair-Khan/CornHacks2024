@@ -2,8 +2,6 @@ from player import player
 from enemy import enemy
 from entity import entity
 import random
-
-
 class fight:
 
     def attack(attacker: entity, defender: entity):
@@ -22,8 +20,14 @@ class fight:
             for enemy in enemies:
                 if (enemy.getCurrentHP()<=0):
                     print(f"{enemy.name} died!")
+                    player.augments+=enemy.augments;
+                    player.updateStats();
+                    player.dispStats()
+                    player.addScore(int(enemy.value))
+                    print(player.score)
                     enemies.remove(enemy)
                 else:
                     fight.attack(enemy, player);
         if (player.alive == False):
             print("Steven has died. So sad!")
+            print(player.score)
