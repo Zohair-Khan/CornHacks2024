@@ -10,8 +10,11 @@ import random
 floorenemies = [11, 9, 7]
 steven = player("Even Steven", 1000, 20, .4,.6,.3);
 
-floorgraph = levelgraph(3, floorenemies)
-floorgraph.printgraph()
+floorgraph = levelgraph(2, floorenemies)
+# floorgraph.printgraph()
+# for noderows in floorgraph.nodes:
+#     for node in noderows:
+#         print(len(node.children))
 
 
 
