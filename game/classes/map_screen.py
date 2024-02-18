@@ -1,6 +1,7 @@
 import pygame
 import sys
 from battlefield_screen import battlefield_screen
+from player import player
 
 
 def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
@@ -46,7 +47,7 @@ def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if level1_button_rect.collidepoint(event.pos):
                     current_state = battlefield_screen(
-                        screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+                        screen, SCREEN_WIDTH, SCREEN_HEIGHT, player)
 
         # Update the display
         pygame.display.flip()
