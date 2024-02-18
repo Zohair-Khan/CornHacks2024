@@ -10,7 +10,7 @@ class player(entity):
         self.rect = self.image.get_rect()
 
     def addScore(self,enemyToughness):
-		self.score+=(15-enemyToughness)**2;
+        self.score+=(15-enemyToughness)**2;
         
     def move(self):
         SPEED = 1
