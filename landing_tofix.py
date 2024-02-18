@@ -1,11 +1,8 @@
-#GO TO LINE 88, I THINK THE PROBLEM IS AFTER THAT   
-
 import pygame
 import sys
 
 pygame.init()
 
-# Colors Defining
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (192, 192, 192)
@@ -35,19 +32,42 @@ credits_button_rect = pygame.Rect(20, SCREEN_HEIGHT - button_height - 20, button
 start_text = font.render("Start", True, BLACK)
 map_text = font.render("Map", True, BLACK)
 credits_text = font.render("Credits", True, BLACK)
-difficulty_text = font.render("Difficulty", True, BLACK)
-easy_text = small_font.render("Easy", True, BLACK)
-insane_text = small_font.render("Insane", True, BLACK)
 
 # Variables for map
 map_mode = False
 current_floor = 1
 current_stage = 1
+# Define a list to represent the number of nodes in each row
+nodes_per_row = [1, 2, 3, 2, 1]
+
+total_nodes = sum(nodes_per_row)
+num_rows = len(nodes_per_row)
+
+node_width = 50
+node_height = 50
+horizontal_spacing = (SCREEN_WIDTH - node_width) // 10
+vertical_spacing = (SCREEN_HEIGHT - num_rows * node_height) // (num_rows + 20)
+
+# Generate node positions based on the number of nodes in each row
+node_positions = []
+node_names = []  # List to store node names
+for row, num_nodes in enumerate(nodes_per_row):
+    row_width = num_nodes * node_width + (num_nodes - 1) * horizontal_spacing
+    start_x = (SCREEN_WIDTH - row_width) // 2
+    start_y = (row + 15) * vertical_spacing + row * node_height
+    for col in range(num_nodes):
+        x = start_x + col * (node_width + horizontal_spacing)
+        y = start_y
+        node_positions.append((x, y))
+        node_names.append(f"{row + 1}{col + 1}")  # Generating node names dynamically
 
 # Game loop
 while True:
     screen.fill(WHITE)
     screen.blit(background_image, (0, 0))
+
+    clicked_node = None  # Variable to track the clicked node
+    hovered_node = None  # Variable to track the hovered node
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,62 +82,40 @@ while True:
                     map_mode = True
                 elif credits_button_rect.collidepoint(event.pos):
                     print("Credits button clicked")
+        elif event.type == pygame.MOUSEBUTTONDOWN and map_mode and clicked_node is None:  # Check if a node has already been clicked
+            if event.button == 1:
+                # Check if any node is clicked
+                for i, pos in enumerate(node_positions, start=1):
+                    node_rect = pygame.Rect(pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
+                    if node_rect.collidepoint(event.pos):
+                        clicked_node = i  # Record the clicked node
+                        break  # No need to check other nodes if one is already clicked
 
     if map_mode:
-        #Map plotting
+        # Map plotting
         pygame.draw.rect(screen, WHITE, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100))
         pygame.draw.rect(screen, BLACK, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100), 2)
         floor_label = font.render(f"Floor {current_floor}", True, BLACK)
         screen.blit(floor_label, (500 - floor_label.get_width() // 2, 70))
-    
-        #Node defining
-        node_positions = [
-            (SCREEN_WIDTH // 2, 150),  # Top node
-            (SCREEN_WIDTH // 2 - 75, 225), # Top Left node
-            (SCREEN_WIDTH // 2 +75, 225),  # Top Right node
-            (SCREEN_WIDTH // 2 - 150, 300),  # Left node
-            (SCREEN_WIDTH // 2, 300),  # Mid node
-            (SCREEN_WIDTH // 2 + 150, 300),  # Right node
-            (SCREEN_WIDTH // 2 - 75, 375), # Bottom Left node
-            (SCREEN_WIDTH // 2 +75, 375),  # Bottom Right node
-            (SCREEN_WIDTH // 2, 450),  # Center (boss) node
-        ]
-    
+
         # Draw nodes and make them clickable
         for i, pos in enumerate(node_positions, start=1):
-            node_rect = pygame.Rect(pos[0] - 25, pos[1] - 25, 50, 50)
-            
+            node_rect = pygame.Rect(pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
+
             # Check if node is clicked
-            if node_rect.collidepoint(pygame.mouse.get_pos()):
+            if clicked_node == i:
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
-                if pygame.mouse.get_pressed()[0]: # Check left mouse button click
-                    print(f"Clicked node {i}")
+                print(f"Clicked node {node_names[i - 1]}")
+            elif node_rect.collidepoint(pygame.mouse.get_pos()):  # Check if mouse is over the node
+                pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
+                hovered_node = i  # Record the hovered node
             else:
                 pygame.draw.rect(screen, GRAY, node_rect)
-    
-            #write node number on the nodes
-            if(i == 1):
-                node_number_text = small_font.render("01", True, BLACK)
-            if(i == 2):
-                node_number_text = small_font.render("11", True, BLACK)
-            if(i == 3):
-                node_number_text = small_font.render("12", True, BLACK)
-            if(i == 4):
-                node_number_text = small_font.render("21", True, BLACK)
-            if(i == 5):
-                node_number_text = small_font.render("22", True, BLACK)
-            if(i == 6):
-                node_number_text = small_font.render("23", True, BLACK)
-            if(i == 7):
-                node_number_text = small_font.render("31", True, BLACK)
-            if(i == 8):
-                node_number_text = small_font.render("32", True, BLACK)
-            if(i == 9):
-                node_number_text = small_font.render("41", True, BLACK)
-            
-            #node_number_text = small_font.render(str(i), True, BLACK)
+
+            # Write node number on the nodes
+            node_number_text = small_font.render(node_names[i - 1], True, BLACK)
             screen.blit(node_number_text, (pos[0] - node_number_text.get_width() // 2, pos[1] - node_number_text.get_height() // 2))
-    
+
     else:
         # Basic Button drawing
         pygame.draw.rect(screen, GRAY, start_button_rect)
