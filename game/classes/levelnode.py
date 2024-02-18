@@ -11,11 +11,14 @@ class levelnode:
         self.difficulty = difficulty
         self.children = []
 
-    def onNodeTriggered(self, player, floorenemies):
+    def onNodeTriggered(self, player, floorenemies, boss="false"):
         enemies = []
-        for i in range(self.difficulty):
-            newEnemy = enemy(random.choice(floorenemies))
-            enemies.append(newEnemy)
+        if boss:
+            newEnemy = bossify(enemy(floorenemies))
+        else:
+            for i in range(self.difficulty):
+                newEnemy = enemy(random.choice(floorenemies))
+                enemies.append(newEnemy)
         fight.fightcycle(player, enemies)
         player.dispStats()
         
