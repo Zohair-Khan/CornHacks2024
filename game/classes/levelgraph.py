@@ -25,7 +25,8 @@ class levelgraph():
                 rownodes.append(newnode)
             self.nodes.append(rownodes)
             index+=1
-
+        # finalnode = levelnode(1)
+        self.nodes.append([levelnode])
         # setting children
         rowindex = 0
         for i in range(len(self.nodes)):
@@ -56,6 +57,7 @@ class levelgraph():
                         self.nodes[i][j].add_child(self.nodes[i+1][j-1])
                         
             rowindex+=1
+        # self.nodes[len(self.nodes)-2][0].add_child(finalnode)
 
 
     def printgraph(self):
