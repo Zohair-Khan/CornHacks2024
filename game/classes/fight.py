@@ -33,7 +33,7 @@ class fight:
                     player.augments+=enemy.augments;
                     player.modifyHP(25-enemy.value)
                     player.updateStats();
-                    player.addScore(int(enemy.value))
+                    player.addScore(enemy.value)
                     enemies.remove(enemy)
                 else:
                     #Enemies with HP > 0 attack the player
