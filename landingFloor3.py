@@ -39,8 +39,8 @@ credits_text = font.render("Credits", True, BLACK)
 
 # Variables for map
 map_mode = False
-current_floor = 1
-current_stage = 1
+current_floor = 3
+current_stage = 3
 # Define a list to represent the number of nodes in each row
 nodes_per_row = [1, 2, 3, 4, 3, 2, 1]
 
