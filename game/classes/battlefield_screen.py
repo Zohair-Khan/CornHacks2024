@@ -24,9 +24,14 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         pygame.draw.rect(screen, RED, (x, y, 400, 30))
         pygame.draw.rect(screen, YELLOW, (x, y, 400*ratio, 30))
 
+        if health <= 0:
+            print("Enemy died!")
+
     # create player
-    fighter_1 = Fighter(50, 180, "assets/characterImages/Steven.png")
-    fighter_2 = Fighter(600, 200, "assets/characterImages/DementedNine.png")
+    fighter_1 = Fighter("Steven", 100, 100, 100, 100, 100, 50,
+                        180, "assets/characterImages/Steven.png")
+    fighter_2 = Fighter("Enemy", 100, 100, 100, 100, 100, 600,
+                        200, "assets/characterImages/DementedNine.png")
 
     # Game loop for the battlefield screen
     while True:
@@ -34,14 +39,19 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         screen.blit(background_image, (0, 0))
 
         # show health bar
-        draw_health_bar(fighter_1.health, 20, 20)
-        draw_health_bar(fighter_2.health, 580, 20)
+        draw_health_bar(fighter_1.maxhp, 20, 20)
+        draw_health_bar(fighter_2.maxhp, 580, 20)
 
         # move fighter
         fighter_1.move(SCREEN_WIDTH, screen, fighter_2)
         # draw fighter
         fighter_1.draw(screen)
-        fighter_2.draw(screen)
+
+        # draw health bar for fighter_2 if it exists
+        if fighter_2 is not None:
+            draw_health_bar(fighter_2.maxhp, 580, 20)
+            # draw fighter
+            fighter_2.draw(screen)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -50,6 +60,10 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Handle mouse clicks on any interactive elements
                 pass
+
+        # Check if fighter_2's health is 0, if so, remove it
+        if fighter_2 is not None and fighter_2.maxhp <= 0:
+            fighter_2 = None
 
         # Update the display
         pygame.display.flip()
