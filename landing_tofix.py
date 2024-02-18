@@ -44,13 +44,9 @@ current_stage = 1
 # Define a list to represent the number of nodes in each row
 nodes_per_row = [1, 2, 3, 2, 1]
 
-# Calculate the total number of nodes
 total_nodes = sum(nodes_per_row)
-
-# Calculate the number of rows
 num_rows = len(nodes_per_row)
 
-# Calculate the node positions dynamically
 node_width = 50
 node_height = 50
 horizontal_spacing = (SCREEN_WIDTH - node_width) // 10
@@ -67,16 +63,12 @@ for row, num_nodes in enumerate(nodes_per_row):
         x = start_x + col * (node_width + horizontal_spacing)
         y = start_y
         node_positions.append((x, y))
-        # Generating node names dynamically
-        node_names.append(f"{row + 1}{col + 1}")
+        node_names.append(f"{row + 1}{col + 1}")  # Generating node names dynamically
 
 # Game loop
 while True:
     screen.fill(WHITE)
     screen.blit(background_image, (0, 0))
-
-    clicked_node = None  # Variable to track the clicked node
-    hovered_node = None  # Variable to track the hovered node
 
     clicked_node = None  # Variable to track the clicked node
     hovered_node = None  # Variable to track the hovered node
@@ -94,58 +86,45 @@ while True:
                     map_mode = True
                 elif credits_button_rect.collidepoint(event.pos):
                     print("Credits button clicked")
-        # Check if a node has already been clicked
-        elif event.type == pygame.MOUSEBUTTONDOWN and map_mode and clicked_node is None:
+
+        elif event.type == pygame.MOUSEBUTTONDOWN and map_mode and clicked_node is None:  # Check if a node has already been clicked
             if event.button == 1:
                 # Check if any node is clicked
                 for i, pos in enumerate(node_positions, start=1):
-                    node_rect = pygame.Rect(
-                        pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
-                    if node_rect.collidepoint(event.pos):
-                        clicked_node = i  # Record the clicked node
-                        break  # No need to check other nodes if one is already clicked
-        # Check if a node has already been clicked
-        elif event.type == pygame.MOUSEBUTTONDOWN and map_mode and clicked_node is None:
-            if event.button == 1:
-                # Check if any node is clicked
-                for i, pos in enumerate(node_positions, start=1):
-                    node_rect = pygame.Rect(
-                        pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
+                    node_rect = pygame.Rect(pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
+
                     if node_rect.collidepoint(event.pos):
                         clicked_node = i  # Record the clicked node
                         break  # No need to check other nodes if one is already clicked
 
     if map_mode:
-        #  Map plotting
-        pygame.draw.rect(
-            screen, WHITE, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100))
-        pygame.draw.rect(
-            screen, BLACK, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100), 2)
+
+        # Map plotting
+        pygame.draw.rect(screen, WHITE, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100))
+        pygame.draw.rect(screen, BLACK, (50, 50, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100), 2)
+
         floor_label = font.render(f"Floor {current_floor}", True, BLACK)
         screen.blit(floor_label, (500 - floor_label.get_width() // 2, 70))
 
         # Draw nodes and make them clickable
         for i, pos in enumerate(node_positions, start=1):
-            node_rect = pygame.Rect(
-                pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
+
+            node_rect = pygame.Rect(pos[0] - node_width // 2, pos[1] - node_height // 2, node_width, node_height)
 
             # Check if node is clicked
             if clicked_node == i:
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
                 print(f"Clicked node {node_names[i - 1]}")
-            # Check if mouse is over the node
-            elif node_rect.collidepoint(pygame.mouse.get_pos()):
-                # Highlight the node
+            elif node_rect.collidepoint(pygame.mouse.get_pos()):  # Check if mouse is over the node
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
+
                 hovered_node = i  # Record the hovered node
             else:
                 pygame.draw.rect(screen, GRAY, node_rect)
 
             # Write node number on the nodes
-            node_number_text = small_font.render(
-                node_names[i - 1], True, BLACK)
-            screen.blit(node_number_text, (pos[0] - node_number_text.get_width(
-            ) // 2, pos[1] - node_number_text.get_height() // 2))
+            node_number_text = small_font.render(node_names[i - 1], True, BLACK)
+            screen.blit(node_number_text, (pos[0] - node_number_text.get_width() // 2, pos[1] - node_number_text.get_height() // 2))
 
     else:
         # Basic Button drawing
