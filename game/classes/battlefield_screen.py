@@ -18,14 +18,14 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
 
     # load player image
     player_image = pygame.image.load("assets/characterImages/Steven.png")
-    player_image = pygame.transform.scale(player_image, (50, 50))
+    player_image = pygame.transform.scale(player_image, (150, 150))
 
     # Game loop for the battlefield screen
     while True:
         screen.fill(WHITE)
         screen.blit(background_image, (0, 0))
         # Draw the player on the screen
-        screen.blit(player_image, (player.x, player.y))
+        screen.blit(player_image, (SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -33,7 +33,7 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Handle mouse clicks on any interactive elements
-                pass  # Replace this with your logic
+                pass
 
         # Update the display
         pygame.display.flip()
