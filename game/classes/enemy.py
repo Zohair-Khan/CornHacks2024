@@ -49,8 +49,8 @@ class enemy(entity):
 
 		#Defines all base stats of enemies of a given value
 		enemyBaseStats = {11: {"name": "Useless Eleven", "maxhp": 20, "power": 10, "evasion": .30, "accuracy": .60, "critrate": .10}  , 
-						  9 : {"name": "Nefarious Nine" , "maxhp": 35, "power": 32, "evasion": .36, "accuracy": .68, "critrate": .20} ,
-						  7 : {"name": "Savage Seven" , "maxhp": 40, "power": 46, "evasion": .42, "accuracy": .76, "critrate": .40}   ,
+						  9 : {"name": "Nefarious Nine" , "maxhp": 35, "power": 18, "evasion": .36, "accuracy": .68, "critrate": .20} ,
+						  7 : {"name": "Savage Seven" , "maxhp": 40, "power": 36, "evasion": .42, "accuracy": .76, "critrate": .40}   ,
 						  5 : {"name": "Fearsome Five" , "maxhp": 90, "power": 46, "evasion": .42, "accuracy": .80, "critrate": .25}  ,
 						  3 : {"name": "Trickster Three" , "maxhp": 80, "power": 55, "evasion": .65, "accuracy": .92, "critrate": .30},
 						  1 : {"name": "One" , "maxhp": 100, "power": 90, "evasion": .3, "accuracy": 1.0, "critrate": .40}            }
