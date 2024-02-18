@@ -31,7 +31,7 @@ class fight:
                     print(f"{enemy.name} died!")
                     #Player picks up enemy augments and regenerates some HP upon killing an enemy
                     player.augments+=enemy.augments;
-                    player.modifyHP(15-enemy.value)
+                    player.modifyHP(25-enemy.value)
                     player.updateStats();
                     player.addScore(int(enemy.value))
                     enemies.remove(enemy)

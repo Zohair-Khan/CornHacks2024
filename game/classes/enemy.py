@@ -48,12 +48,12 @@ class enemy(entity):
 									augment("Godly Augment of Accuracy", "accuracy", "add",.09)                ]}
 
 		#Defines all base stats of enemies of a given value
-		enemyBaseStats = {11: {"name": "Useless Eleven", "maxhp": 20, "power": 10, "evasion": .30, "accuracy": .60, "critrate": .10}  , 
-						  9 : {"name": "Nefarious Nine" , "maxhp": 35, "power": 32, "evasion": .36, "accuracy": .68, "critrate": .20} ,
-						  7 : {"name": "Savage Seven" , "maxhp": 40, "power": 46, "evasion": .42, "accuracy": .76, "critrate": .40}   ,
-						  5 : {"name": "Fearsome Five" , "maxhp": 90, "power": 46, "evasion": .42, "accuracy": .80, "critrate": .25}  ,
-						  3 : {"name": "Trickster Three" , "maxhp": 80, "power": 55, "evasion": .65, "accuracy": .92, "critrate": .30},
-						  1 : {"name": "One" , "maxhp": 100, "power": 90, "evasion": .3, "accuracy": 1.0, "critrate": .40}            }
+		enemyBaseStats = {11: {"name": "Useless Eleven", "maxhp": 20, "power": 10, "evasion": .16, "accuracy": .4, "critrate": .10}  , 
+						  9 : {"name": "Nefarious Nine" , "maxhp": 35, "power": 16, "evasion": .22, "accuracy": .48, "critrate": .20} ,
+						  7 : {"name": "Savage Seven" , "maxhp": 40, "power": 32, "evasion": .28, "accuracy": .56, "critrate": .40}   ,
+						  5 : {"name": "Fearsome Five" , "maxhp": 90, "power": 42, "evasion": .36, "accuracy": .64, "critrate": .25}  ,
+						  3 : {"name": "Trickster Three" , "maxhp": 80, "power": 55, "evasion": .42, "accuracy": .72, "critrate": .30},
+						  1 : {"name": "One" , "maxhp": 100, "power": 80, "evasion": .5, "accuracy": .8, "critrate": .40}            }
 
 		def __init__(self, value):
 			super().__init__(self.enemyBaseStats[value]["name"], self.enemyBaseStats[value]["maxhp"],self.enemyBaseStats[value]["power"], self.enemyBaseStats[value]["evasion"], self.enemyBaseStats[value]["accuracy"], self.enemyBaseStats[value]["critrate"])
@@ -63,3 +63,4 @@ class enemy(entity):
 		def bossify(self):
 			#Bosses draw an additional augment!
 			self.addAugment(random.choice(self.enemyAugments[self.value]))
+			self.score-=2
