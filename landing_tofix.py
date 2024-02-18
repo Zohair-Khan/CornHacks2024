@@ -72,32 +72,50 @@ while True:
     
         #Node defining
         node_positions = [
-            (SCREEN_WIDTH // 2, 100),  # Top node
-            (SCREEN_WIDTH // 2 - 150, 250),  # Left node
-            (SCREEN_WIDTH // 2 + 150, 250),  # Right node
-            (SCREEN_WIDTH // 2, 400),  # Center (boss) node
+            (SCREEN_WIDTH // 2, 150),  # Top node
+            (SCREEN_WIDTH // 2 - 75, 225), # Top Left node
+            (SCREEN_WIDTH // 2 +75, 225),  # Top Right node
+            (SCREEN_WIDTH // 2 - 150, 300),  # Left node
+            (SCREEN_WIDTH // 2, 300),  # Mid node
+            (SCREEN_WIDTH // 2 + 150, 300),  # Right node
+            (SCREEN_WIDTH // 2 - 75, 375), # Bottom Left node
+            (SCREEN_WIDTH // 2 +75, 375),  # Bottom Right node
+            (SCREEN_WIDTH // 2, 450),  # Center (boss) node
         ]
-    
-        # to track if a node has been clicked or not
-        node_clicked = [False] * len(node_positions)
     
         # Draw nodes and make them clickable
         for i, pos in enumerate(node_positions, start=1):
             node_rect = pygame.Rect(pos[0] - 25, pos[1] - 25, 50, 50)
-            pygame.draw.polygon(screen, GRAY, [(pos[0], pos[1] - 20), (pos[0] + 20, pos[1]), (pos[0], pos[1] + 20), (pos[0] - 20, pos[1])])
-            pygame.draw.polygon(screen, BLACK, [(pos[0], pos[1] - 20), (pos[0] + 20, pos[1]), (pos[0], pos[1] + 20), (pos[0] - 20, pos[1])], 2)
             
             # Check if node is clicked
             if node_rect.collidepoint(pygame.mouse.get_pos()):
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
-                if pygame.mouse.get_pressed()[0] and not node_clicked[i - 1]:  # Check left mouse button click
-                    node_clicked[i - 1] = True
+                if pygame.mouse.get_pressed()[0]: # Check left mouse button click
                     print(f"Clicked node {i}")
             else:
                 pygame.draw.rect(screen, GRAY, node_rect)
     
             #write node number on the nodes
-            node_number_text = small_font.render(str(i), True, BLACK)
+            if(i == 1):
+                node_number_text = small_font.render("01", True, BLACK)
+            if(i == 2):
+                node_number_text = small_font.render("11", True, BLACK)
+            if(i == 3):
+                node_number_text = small_font.render("12", True, BLACK)
+            if(i == 4):
+                node_number_text = small_font.render("21", True, BLACK)
+            if(i == 5):
+                node_number_text = small_font.render("22", True, BLACK)
+            if(i == 6):
+                node_number_text = small_font.render("23", True, BLACK)
+            if(i == 7):
+                node_number_text = small_font.render("31", True, BLACK)
+            if(i == 8):
+                node_number_text = small_font.render("32", True, BLACK)
+            if(i == 9):
+                node_number_text = small_font.render("41", True, BLACK)
+            
+            #node_number_text = small_font.render(str(i), True, BLACK)
             screen.blit(node_number_text, (pos[0] - node_number_text.get_width() // 2, pos[1] - node_number_text.get_height() // 2))
     
     else:
