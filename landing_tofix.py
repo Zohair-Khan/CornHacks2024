@@ -108,6 +108,7 @@ while True:
                 print(f"Clicked node {node_names[i - 1]}")
             elif node_rect.collidepoint(pygame.mouse.get_pos()):  # Check if mouse is over the node
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
+
                 hovered_node = i  # Record the hovered node
             else:
                 pygame.draw.rect(screen, GRAY, node_rect)
