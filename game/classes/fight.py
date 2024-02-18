@@ -2,7 +2,8 @@ from player import player
 from enemy import enemy
 from entity import entity
 import random
-def attack(attacker: entity, defender: entity):
+class fight:
+    def attack(attacker: entity, defender: entity):
         attackerstats = attacker.returnStats()
         
         attackodds = attackerstats["accuracy"]*(1.0-defender.returnStats()["evasion"])

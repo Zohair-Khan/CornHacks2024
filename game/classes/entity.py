@@ -1,10 +1,5 @@
 from augments import augment
 class entity:
-    augments = [];
-    currenthp = 999;
-    baseStats = {};
-    currentStats = {};
-
     def __init__(self, name, maxhp, power, evasion, accuracy, critrate):
         self.setName(name)
         self.setMaxHP(maxhp)
@@ -14,6 +9,7 @@ class entity:
         self.setCritRate(critrate)
         self.baseStats = self.getBaseStats();
         self.currentStats = dict(self.baseStats, currenthp = self.getMaxHP());
+        self.augments = [];
 
     def addAugment(self, augment):
         self.augments.append(augment)

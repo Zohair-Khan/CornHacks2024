@@ -1,9 +1,9 @@
 import unittest
-from game.classes.entity import entity
-from game.classes.player import player
-from game.classes.fight import fight
-from game.classes.augments import augment
-from game.classes.enemy import enemy
+from entity import entity
+from player import player
+from fight import fight
+from augments import augment
+from enemy import enemy
 
 class TestEntityMethods(unittest.TestCase):
 
@@ -17,7 +17,7 @@ class TestEntityMethods(unittest.TestCase):
         character = player("Even Steven",20,10,.3,.6,.15);
         powerAddingAugment = augment("Lesser Power Augment of Addition", "power", "add", 5);
         character.addAugment(powerAddingAugment);
-        print(character.augments);
+        # print(character.augments);
         stats = character.returnStats();
         self.assertEqual(stats["power"],15);
 
@@ -25,7 +25,7 @@ class TestEntityMethods(unittest.TestCase):
         character = enemy("Seven of Heaven",20,10,.3,.6,.15);
         powerMultiplyingAugment = augment("Lesser Power Augment of Multiplication", "power", "multiply", 1.2);
         character.addAugment(powerMultiplyingAugment);
-        print(character.augments);
+        # print(character.augments);
         stats = character.returnStats();
         self.assertEqual(stats["power"],12);
 
