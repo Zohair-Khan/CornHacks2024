@@ -1,16 +1,21 @@
 import pygame
+from entity import entity
 
 
-class Fighter():
-    def __init__(self, x, y, image_path):
-        self.flip = False
+class Fighter(entity):
+    def __init__(self, name, maxhp, power, evasion, accuracy, critrate, x, y, image_path):
+        super().__init__(name, maxhp, power, evasion, accuracy, critrate)
+        self.score = 0
         self.image = pygame.image.load(image_path)
         self.rect = self.image.get_rect(topleft=(x, y))
+        self.flip = False
         self.attacking = False
         self.attack_type = 0
-        self.health = 100
         self.original_x = x
         self.target_x = None
+
+    def addScore(self, enemyToughness):
+        self.score += (15 - enemyToughness) ** 2
 
     def move(self, screen_width, surface, target):
         SPEED = 5
@@ -68,7 +73,7 @@ class Fighter():
         attacking_rect = pygame.Rect(
             self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
         if attacking_rect.colliderect(target.rect):
-            target.health -= 10
+            target.maxhp -= 10
 
     def draw(self, surface):
         player_image = pygame.transform.scale(self.image, (400, 400))
