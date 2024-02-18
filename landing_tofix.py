@@ -1,11 +1,8 @@
-#GO TO LINE 88, I THINK THE PROBLEM IS AFTER THAT   
-
 import pygame
 import sys
 
 pygame.init()
 
-# Colors Defining
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (192, 192, 192)
@@ -35,9 +32,6 @@ credits_button_rect = pygame.Rect(20, SCREEN_HEIGHT - button_height - 20, button
 start_text = font.render("Start", True, BLACK)
 map_text = font.render("Map", True, BLACK)
 credits_text = font.render("Credits", True, BLACK)
-difficulty_text = font.render("Difficulty", True, BLACK)
-easy_text = small_font.render("Easy", True, BLACK)
-insane_text = small_font.render("Insane", True, BLACK)
 
 # Variables for map
 map_mode = False
@@ -46,13 +40,9 @@ current_stage = 1
 # Define a list to represent the number of nodes in each row
 nodes_per_row = [1, 2, 3, 2, 1]
 
-# Calculate the total number of nodes
 total_nodes = sum(nodes_per_row)
-
-# Calculate the number of rows
 num_rows = len(nodes_per_row)
 
-# Calculate the node positions dynamically
 node_width = 50
 node_height = 50
 horizontal_spacing = (SCREEN_WIDTH - node_width) // 10
@@ -117,7 +107,8 @@ while True:
                 pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
                 print(f"Clicked node {node_names[i - 1]}")
             elif node_rect.collidepoint(pygame.mouse.get_pos()):  # Check if mouse is over the node
-                pygame.draw.rect(screen, LIGHT_GREEN, node_rect)  # Highlight the node
+                pygame.draw.rect(screen, LIGHT_GREEN, node_rect)
+
                 hovered_node = i  # Record the hovered node
             else:
                 pygame.draw.rect(screen, GRAY, node_rect)
