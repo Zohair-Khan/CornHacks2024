@@ -10,7 +10,7 @@ class entity:
         self.baseStats = self.getBaseStats();
         self.currentStats = dict(self.baseStats, currenthp = self.getMaxHP());
         self.augments = [];
-
+        self.alive = True;
     def addAugment(self, augment):
         self.augments.append(augment)
 
@@ -39,11 +39,11 @@ class entity:
         self.setCurrentHP(self.getCurrentHP()+value)
         if(self.getCurrentHP() <= 0):
             self.gameOver();
-        if(self.getCurrentHP > maxhp):
+        if(self.getCurrentHP() > maxhp):
             self.setCurrentHP(maxhp)
 
     def gameOver(self):
-        return (self.getCurrentHP() <= 0)
+        self.alive = False;
 
 
 
