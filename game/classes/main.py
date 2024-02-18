@@ -20,21 +20,12 @@ pygame.display.set_caption("EVEN Steven Beats ODDS")
 
 # load player image
 player_image = pygame.image.load("assets/characterImages/Steven.png")
-player_image = pygame.transform.scale(player_image, (50, 50))
 
-# Create player object
-player = player("Player", maxhp=100, power=10,
-                evasion=0.2, accuracy=0.8, critrate=0.1)
-player_x = SCREEN_WIDTH // 2
-player_y = SCREEN_HEIGHT // 2
+current_screen = START_SCREEN
 
 # game loop
 run = True
-current_screen = START_SCREEN
-
 while run:
-    # Draw player on screen
-    screen.blit(player_image, (player_x, player_y))
 
     # event handler
     for event in pygame.event.get():
@@ -47,7 +38,7 @@ while run:
             current_screen = map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
         elif current_screen == BATTLE_SCREEN:
             current_screen = battlefield_screen(
-                screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+                screen, SCREEN_WIDTH, SCREEN_HEIGHT, player_image)
 
     pygame.display.flip()  # Update display
 

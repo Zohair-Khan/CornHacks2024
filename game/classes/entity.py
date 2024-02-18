@@ -15,10 +15,10 @@ class entity:
         self.setAccuracy(accuracy)
         self.setCritRate(critrate)
 
-        self.baseStats = self.getBaseStats();
-        self.currentStats = dict(self.baseStats, currenthp = self.getMaxHP());
-        self.augments = [];
-        self.alive = True;
+        self.baseStats = self.getBaseStats()
+        self.currentStats = dict(self.baseStats, currenthp=self.getMaxHP())
+        self.augments = []
+        self.alive = True
 
     def addAugment(self, augment):
         self.augments.append(augment)
@@ -47,13 +47,13 @@ class entity:
         maxhp = self.returnStats()["maxhp"]
         self.setCurrentHP(self.getCurrentHP()+value)
 
-        if(self.getCurrentHP() <= 0):
-            self.gameOver();
-        if(self.getCurrentHP() > maxhp):
+        if (self.getCurrentHP() <= 0):
+            self.gameOver()
+        if (self.getCurrentHP() > maxhp):
             self.setCurrentHP(maxhp)
 
     def gameOver(self):
-        self.alive = False;
+        self.alive = False
 
     # Getters and Setters
 

@@ -2,6 +2,8 @@ from player import player
 from enemy import enemy
 from entity import entity
 import random
+
+
 class fight:
 
     def attack(attacker: entity, defender: entity):
