@@ -7,9 +7,6 @@ from fighter import Fighter
 def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
     # Colors Defining
     WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    GRAY = (192, 192, 192)
-    LIGHT_GREEN = (144, 238, 144)
     RED = (255, 0, 0)
     YELLOW = (255, 255, 0)
     WHITE = (255, 255, 255)
