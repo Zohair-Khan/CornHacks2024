@@ -7,9 +7,6 @@ from fighter import Fighter
 def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
     # Colors Defining
     WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    GRAY = (192, 192, 192)
-    LIGHT_GREEN = (144, 238, 144)
     RED = (255, 0, 0)
     YELLOW = (255, 255, 0)
     WHITE = (255, 255, 255)
@@ -27,15 +24,14 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         pygame.draw.rect(screen, RED, (x, y, 400, 30))
         pygame.draw.rect(screen, YELLOW, (x, y, 400*ratio, 30))
 
-    # load player image
-    player_image = pygame.image.load(
-        "assets/characterImages/Steven.png").convert_alpha()
-    player_image = pygame.transform.scale(player_image, (400, 400))
+        if health == 0:
+            print("Enemy died!")
 
     # create player
-    player_1 = player("Steven", 100, 100, 100, 100, 100)
-    fighter_1 = Fighter(100, 200)
-    fighter_2 = Fighter(700, 200)
+    fighter_1 = Fighter("Steven", 100, 100, 100, 100, 100, 50,
+                        180, "assets/characterImages/Steven.png")
+    fighter_2 = Fighter("Enemy", 100, 100, 100, 100, 100, 600,
+                        200, "assets/characterImages/DementedNine.png")
 
     # Game loop for the battlefield screen
     while True:
@@ -43,18 +39,19 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         screen.blit(background_image, (0, 0))
 
         # show health bar
-        draw_health_bar(fighter_1.health, 20, 20)
-        draw_health_bar(fighter_2.health, 580, 20)
-
-        # Draw the player on the screen
-        screen.blit(player_image, (60, 100))
-        player_1.move()
+        draw_health_bar(fighter_1.maxhp, 20, 20)
+        draw_health_bar(fighter_2.maxhp, 580, 20)
 
         # move fighter
         fighter_1.move(SCREEN_WIDTH, screen, fighter_2)
         # draw fighter
         fighter_1.draw(screen)
-        fighter_2.draw(screen)
+
+        # draw health bar for fighter_2 if it exists
+        if fighter_2 is not None and fighter_2.maxhp > 0:
+            draw_health_bar(fighter_2.maxhp, 580, 20)
+            # draw fighter
+            fighter_2.draw(screen)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

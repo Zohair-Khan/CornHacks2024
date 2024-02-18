@@ -1,6 +1,6 @@
 import pygame
 import sys
-from battlefield_screen import battlefield_screen
+from node_screen import node_screen
 from player import player
 
 
@@ -28,6 +28,9 @@ def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
     # Define level 1 button
     level1_button_rect = level1_button_img.get_rect(bottomleft=(330, 430))
 
+    # track current level
+    current_level = None
+
     # Game loop for the map screen
     while True:
         screen.fill(WHITE)
@@ -46,8 +49,9 @@ def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if level1_button_rect.collidepoint(event.pos):
-                    current_state = battlefield_screen(
-                        screen, SCREEN_WIDTH, SCREEN_HEIGHT, player)
+                    current_level = 1
+                    current_state = node_screen(
+                        screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
         # Update the display
         pygame.display.flip()
