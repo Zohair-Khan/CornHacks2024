@@ -3,7 +3,7 @@ from augments import augment
 import random
 
 class enemy(entity):
-		enemy_augments =	{"11": [augment("Inferior Augment of Additive HP", "maxhp","add",2)                , 
+		enemyAugments =	{"11": [augment("Inferior Augment of Additive HP", "maxhp","add",2)                , 
 							        augment("Inferior Augment of Multiplicative HP","maxhp","multiply",1.05)   ,
 							        augment("Inferior Augment of Additive Power","power","add",5)              , 
 							        augment("Inferior Augment of Multiplicative Power","power","multiply",1.15),
@@ -39,14 +39,14 @@ class enemy(entity):
 							        augment("Superior Augment of Evasion","evasion","add",.04)                 , 
 							        augment("Superior Augment of Accuracy","accuracy","add",.04)               ]}
 
-		enemyBaseStats = {"11": {"name": "11placeholder", "maxhp": 20, "power": 10, "evasion": .30, "accuracy": .60, "critrate": .10}, 
-						  "9" : {"name": "9placeholder", "maxhp": 35, "power": 18, "evasion": .36, "accuracy": .68, "critrate": .15},
-						  "7" : {"name": "7placeholder", "maxhp": 50, "power": 30, "evasion": .42, "accuracy": .76, "critrate": .20},
-						  "5" : {"name": "5placeholder", "maxhp": 65, "power": 46, "evasion": .48, "accuracy": .84, "critrate": .25},
-						  "3" : {"name": "3placeholder", "maxhp": 80, "power": 66, "evasion": .54, "accuracy": .92, "critrate": .30},
-						  "1" : {"name": "1placeholder", "maxhp": 100, "power": 90, "evasion": .3, "accuracy": 1.0, "critrate": .40},}
+		enemyBaseStats = {11: {"name": "11placeholder", "maxhp": 20, "power": 10, "evasion": .30, "accuracy": .60, "critrate": .10}, 
+						  9 : {"name": "9placeholder", "maxhp": 35, "power": 18, "evasion": .36, "accuracy": .68, "critrate": .15},
+						  7 : {"name": "7placeholder", "maxhp": 50, "power": 30, "evasion": .42, "accuracy": .76, "critrate": .20},
+						  5 : {"name": "5placeholder", "maxhp": 65, "power": 46, "evasion": .48, "accuracy": .84, "critrate": .25},
+						  3 : {"name": "3placeholder", "maxhp": 80, "power": 66, "evasion": .54, "accuracy": .92, "critrate": .30},
+						  1 : {"name": "1placeholder", "maxhp": 100, "power": 90, "evasion": .3, "accuracy": 1.0, "critrate": .40},}
 
-		def __init__(self, name, value):
-			super().__init__(name, self.enemyBaseStats[str(value)]["maxhp"],self.enemyBaseStats[str(value)]["power"], self.enemyBaseStats[str(value)]["evasion"], self.enemyBaseStats[str(value)]["accuracy"], self.enemyBaseStats[str(value)]["critrate"])
-			self.addAugment(random.choice(self.enemy_augments[str(value)]))
+		def __init__(self, value):
+			super().__init__(self.enemyBaseStats[value]["name"], self.enemyBaseStats[value]["maxhp"],self.enemyBaseStats[value]["power"], self.enemyBaseStats[value]["evasion"], self.enemyBaseStats[value]["accuracy"], self.enemyBaseStats[value]["critrate"])
+			self.addAugment(random.choice(self.enemyAugments[value]))
 			self.value = value
