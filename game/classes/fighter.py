@@ -2,9 +2,10 @@ import pygame
 
 
 class Fighter():
-    def __init__(self, x, y):
+    def __init__(self, x, y, image_path):
         self.flip = False
-        self.rect = pygame.Rect((x, y, 100, 280))
+        self.image = pygame.image.load(image_path)
+        self.rect = self.image.get_rect(topleft=(x, y))
         self.attacking = False
         self.attack_type = 0
         self.health = 100
@@ -70,4 +71,5 @@ class Fighter():
             target.health -= 10
 
     def draw(self, surface):
-        pygame.draw.rect(surface, (0, 255, 0), self.rect)
+        player_image = pygame.transform.scale(self.image, (400, 400))
+        surface.blit(player_image, self.rect)

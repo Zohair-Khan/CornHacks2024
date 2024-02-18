@@ -27,15 +27,9 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         pygame.draw.rect(screen, RED, (x, y, 400, 30))
         pygame.draw.rect(screen, YELLOW, (x, y, 400*ratio, 30))
 
-    # load player image
-    player_image = pygame.image.load(
-        "assets/characterImages/Steven.png").convert_alpha()
-    player_image = pygame.transform.scale(player_image, (400, 400))
-
     # create player
-    player_1 = player("Steven", 100, 100, 100, 100, 100)
-    fighter_1 = Fighter(100, 200)
-    fighter_2 = Fighter(700, 200)
+    fighter_1 = Fighter(50, 180, "assets/characterImages/Steven.png")
+    fighter_2 = Fighter(600, 200, "assets/characterImages/DementedNine.png")
 
     # Game loop for the battlefield screen
     while True:
@@ -45,10 +39,6 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         # show health bar
         draw_health_bar(fighter_1.health, 20, 20)
         draw_health_bar(fighter_2.health, 580, 20)
-
-        # Draw the player on the screen
-        screen.blit(player_image, (60, 100))
-        player_1.move()
 
         # move fighter
         fighter_1.move(SCREEN_WIDTH, screen, fighter_2)
