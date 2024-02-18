@@ -24,7 +24,7 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         pygame.draw.rect(screen, RED, (x, y, 400, 30))
         pygame.draw.rect(screen, YELLOW, (x, y, 400*ratio, 30))
 
-        if health <= 0:
+        if health == 0:
             print("Enemy died!")
 
     # create player
@@ -48,7 +48,7 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
         fighter_1.draw(screen)
 
         # draw health bar for fighter_2 if it exists
-        if fighter_2 is not None:
+        if fighter_2 is not None and fighter_2.maxhp > 0:
             draw_health_bar(fighter_2.maxhp, 580, 20)
             # draw fighter
             fighter_2.draw(screen)
@@ -60,10 +60,6 @@ def battlefield_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT, player):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Handle mouse clicks on any interactive elements
                 pass
-
-        # Check if fighter_2's health is 0, if so, remove it
-        if fighter_2 is not None and fighter_2.maxhp <= 0:
-            fighter_2 = None
 
         # Update the display
         pygame.display.flip()
