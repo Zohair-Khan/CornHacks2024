@@ -21,17 +21,23 @@ def map_screen(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
     button_width, button_height = 150, 100
     level1_button_img = pygame.transform.scale(
         level1_button_img, (button_width, button_height))
+    level1_button_img_hover = pygame.transform.scale(
+        level1_button_img, (button_width*0.9, button_height*0.9))
 
     # Define level 1 button
-    level1_button_rect = level1_button_img.get_rect(bottomleft=(320, 430))
+    level1_button_rect = level1_button_img.get_rect(bottomleft=(330, 430))
 
     # Game loop for the map screen
     while True:
         screen.fill(WHITE)
         screen.blit(map_image, (0, 0))
 
-        # Render level 1 button and icon
-        screen.blit(level1_button_img, level1_button_rect)
+        # Check if the mouse is over the button
+        mouse_pos = pygame.mouse.get_pos()
+        if level1_button_rect.collidepoint(mouse_pos):
+            screen.blit(level1_button_img_hover, level1_button_rect)
+        else:
+            screen.blit(level1_button_img, level1_button_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
