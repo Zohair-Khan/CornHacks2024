@@ -14,8 +14,11 @@ class entity:
         self.setEvasion(evasion)
         self.setAccuracy(accuracy)
         self.setCritRate(critrate)
-        self.baseStats = self.getBaseStats()
-        self.currentStats = dict(self.baseStats, currenthp=self.getMaxHP())
+
+        self.baseStats = self.getBaseStats();
+        self.currentStats = dict(self.baseStats, currenthp = self.getMaxHP());
+        self.augments = [];
+        self.alive = True;
 
     def addAugment(self, augment):
         self.augments.append(augment)
@@ -43,13 +46,14 @@ class entity:
     def modifyHP(self, value):
         maxhp = self.returnStats()["maxhp"]
         self.setCurrentHP(self.getCurrentHP()+value)
-        if (self.getCurrentHP() <= 0):
-            self.gameOver()
-        if (self.getCurrentHP > maxhp):
+
+        if(self.getCurrentHP() <= 0):
+            self.gameOver();
+        if(self.getCurrentHP() > maxhp):
             self.setCurrentHP(maxhp)
 
     def gameOver(self):
-        return (self.getCurrentHP() <= 0)
+        self.alive = False;
 
     # Getters and Setters
 
