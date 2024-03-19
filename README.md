@@ -46,7 +46,7 @@ We welcome contributions from the community to improve and enhance Even Steven B
 5. Submit a pull request to the main repository.
 
 **Credits:**
-- Developed by Zohair Khan, Joey Ng, Sebastian, Mayank
+- Developed by Zohair Khan, Joey Ng, Sebastian, Mayank Sharma
 - Special thanks to contributors and supporters for their valuable contributions.
 
 **License:**
