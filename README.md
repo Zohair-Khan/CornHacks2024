@@ -18,9 +18,9 @@ Even Steven Beats The Odds is an exciting adventure game set in the lands of Num
    ```
 
 2. Navigate to the project directory:
-  ```
-  cd game/classes
-  ```
+   ```
+   cd game/classes
+   ```
 
 2. Install the required dependencies:
    ```
